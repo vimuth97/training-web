@@ -63,7 +63,7 @@ class App extends React.Component {
       document.getElementById(key)
     ) {
       document.getElementById(key).getElementsByTagName("p1")[0].style.display =
-        "inline";
+        "inline-block";
       document
         .getElementById(key)
         .getElementsByTagName("span")[0].style.display = "none";
@@ -77,7 +77,7 @@ class App extends React.Component {
           .getElementsByTagName("p1")[0].style.display = "none";
         document
           .getElementById(key)
-          .getElementsByTagName("span")[0].style.display = "inline";
+          .getElementsByTagName("span")[0].style.display = "inline-block";
         document
           .getElementById(key)
           .getElementsByTagName("Button")[0].innerText = "Show More";

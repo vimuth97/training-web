@@ -18,11 +18,10 @@ export default function ListItems(props) {
           <Card
             id={item.key}
             style={{
-              width: "18rem",
               borderRadius: "1rem",
               backgroundColor: "lightblue",
               margin: "10px",
-              marginTop: "15px",
+              marginTop: "15px"
             }}
           >
             <CardContent>
