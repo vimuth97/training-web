@@ -26,7 +26,7 @@
 }
 
 body {
-  background-color: rgb(40, 185, 238);
+  background: -webkit-linear-gradient(left,rgba(40,185,255,1),rgba(40,200,255,0.5));
 }
 
 .App-link {

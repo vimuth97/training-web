@@ -97,12 +97,13 @@ class App extends React.Component {
                   id="standard-basic"
                   required
                   style={{
-                    borderRadius: "1rem",
-                    backgroundColor: "#008BAB",
+                    borderRadius: "2rem",
                     padding: "7px",
                     margin: "10px",
+                    backgroundColor:"rgb(140,245,255)",
                     width:"1200px"
                   }}
+                  InputProps={{ disableUnderline: true }}
                   placeholder="Submit New"
                   //variant="filled"
                   value={this.state.currentItem.title || ""}
@@ -113,7 +114,7 @@ class App extends React.Component {
                   type="submit"
                   style={{
                     borderRadius: "1rem",
-                    backgroundColor: "#008BCB",
+                    backgroundColor:"rgb(140,245,255)",
                     margin: "10px",
                     height: "45px"
                   }}
@@ -123,14 +124,20 @@ class App extends React.Component {
               </div>
               <TextField
                 id="filled-textarea"
+                style={{
+                  backgroundColor:"rgb(140,245,255)",
+                  borderRadius:"0.2rem",
+                  padding:"7px"
+                }}
                 required
                 placeholder=" Enter Description"
                 rows={4}
                 fullWidth={true}
                 multiline
-                variant="filled"
+                //variant="filled"
                 value={this.state.currentItem.text || ""}
                 onChange={this.handleInput}
+                InputProps={{ disableUnderline: true }}
               />
             </FormControl>
           </form>
@@ -140,6 +147,7 @@ class App extends React.Component {
           items={this.state.items}
           showMore={this.showMore}
         ></DiaryCard>
+        
       </div>
     );
   }
