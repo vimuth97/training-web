@@ -6,7 +6,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
-
 export default function DiaryCard(props) {
 
   const items = props.items;
@@ -74,7 +73,6 @@ export default function DiaryCard(props) {
 
   return (
     <div className="container-fluid">
-
     <Grid
       container 
       spacing={2}

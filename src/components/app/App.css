@@ -45,3 +45,7 @@ body {
 h2 {
   color: white;
 }
+
+#filled-textarea{
+  display: none;
+}

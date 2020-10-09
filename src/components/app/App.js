@@ -4,26 +4,40 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DiaryCard from "../diarycard/DiaryCard";
+import { Spring } from "react-spring/renderprops";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      items: [
+        {title:"a",
+         text: "b",
+         key:"1"
+      },
+      {title:"a",
+         text: "b",
+         key:"2"
+      }
+      ],
       currentItem: {
         title: "",
         text: "",
         key: "", //to identify each item uniquely
       },
+
     };
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.showMore = this.showMore.bind(this);
   }
 
+  showForm(){
+    document.getElementById("submit").style.display="inline";
+    document.getElementById("filled-textarea").style.display="block";
+  }
   handleInput(e) {
-    console.log(window.innerWidth);
     if (e.target.id === "standard-basic") {
       this.setState({
         currentItem: {
@@ -55,6 +69,8 @@ class App extends React.Component {
         key: "",
       },
     });
+    document.getElementById("submit").style.display="none";
+    document.getElementById("filled-textarea").style.display="none";
   }
 
   showmore = false;
@@ -86,11 +102,17 @@ class App extends React.Component {
           </h2>
           </div>
           <div>
-          <form onSubmit={this.addItem}>
+          <Spring
+          from={{ opacity:0}}
+          to ={{ opacity:1}}
+          config={{delay:500,duration:1200}}
+        >
+          {props =>(
+          <form onSubmit={this.addItem} style={props}>
             <FormControl fullWidth={true}>
-              <div className="container-fluid">
+              <div className="container-fluid" >
               <div className="row">
-              <div className="col-lg-11">
+              <div className="col-lg-12">
                 <TextField
                   id="standard-basic"
                   required
@@ -105,32 +127,23 @@ class App extends React.Component {
                   //variant="filled"
                   value={this.state.currentItem.title || ""}
                   onChange={this.handleInput}
+                  onClick ={this.showForm}
                 />
-                </div>
-                <div className="col-lg-1">
-                <Button
-                  id="submit"
-                  type="submit"
-                  size="large"
-                  style={{
-                    borderRadius: "1rem",
-                    backgroundColor: "rgb(140,155,255)",
-                  }}
-                >
-                  <b>Submit</b>
-                </Button>
-                
+              
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-12">
-              <TextField
-                id="filled-textarea"
+              <div className="row" id="filled-textarea">
+                <div className="col-lg-12" >
+             
+               
+                    <TextField
+                
                 style={{
                   backgroundColor: "rgb(140,245,255)",
                   borderRadius: "0.2rem",
                   padding: "7px",
                   marginTop: "12px",
+              
                 }}
                 required
                 placeholder=" Enter Description"
@@ -144,16 +157,41 @@ class App extends React.Component {
               />
               </div>
               </div>
-
+              <Button
+                  id="submit"
+                  type="submit"
+                  size="large"
+                  style={{
+                    borderRadius: "1rem",
+                    backgroundColor: "rgb(140,155,255)",
+                    marginTop:"10px",
+                    display:"none"
+                  }}
+                >
+                  <b>Submit</b>
+                </Button>
               
-              </div>
+                </div>
+              
             </FormControl>
           </form>
+          )
+        }
+          </Spring>
           </div>
-        <DiaryCard
+          <Spring
+          from={{ opacity:0}}
+          to ={{ opacity:1}}
+          config={{delay:500,duration:1200}}
+        >
+        {props=>(<div style={props}><DiaryCard
           items={this.state.items}
           showMore={this.showMore}
         ></DiaryCard>
+        </div>
+        )
+  }
+        </Spring>
         </div>
   
     );
