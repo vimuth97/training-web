@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   handleInput(e) {
+    console.log(window.innerWidth);
     if (e.target.id === "standard-basic") {
       this.setState({
         currentItem: {
@@ -79,7 +80,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div class="container-fluid">
+        <div className="container-fluid">
           <h2>
             <b>Home</b>
           </h2>
@@ -87,9 +88,9 @@ class App extends React.Component {
           <div>
           <form onSubmit={this.addItem}>
             <FormControl fullWidth={true}>
-              <div class="container-fluid">
-              <div class="row">
-              <div class="col-lg-11">
+              <div className="container-fluid">
+              <div className="row">
+              <div className="col-lg-11">
                 <TextField
                   id="standard-basic"
                   required
@@ -100,13 +101,13 @@ class App extends React.Component {
                   }}
                   InputProps={{ disableUnderline: true }}
                   placeholder="Submit New"
-                  fullWidth="true"
+                  fullWidth={true}
                   //variant="filled"
                   value={this.state.currentItem.title || ""}
                   onChange={this.handleInput}
                 />
                 </div>
-                <div class="col-lg-1">
+                <div className="col-lg-1">
                 <Button
                   id="submit"
                   type="submit"
@@ -121,8 +122,8 @@ class App extends React.Component {
                 
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
+              <div className="row">
+                <div className="col-lg-12">
               <TextField
                 id="filled-textarea"
                 style={{

@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 
 
 export default function DiaryCard(props) {
+
   const items = props.items;
   const listItems = items.map((item) => {
     if (item.text.length > 10) {
@@ -72,7 +73,7 @@ export default function DiaryCard(props) {
   });
 
   return (
-    <div class="container-fluid">
+    <div className="container-fluid">
 
     <Grid
       container 
