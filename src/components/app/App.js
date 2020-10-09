@@ -3,9 +3,8 @@ import "./App.css";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import DiaryCard from "./DiaryCard/DiaryCard";
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import DiaryCard from "../diarycard/DiaryCard";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class App extends React.Component {
       currentItem: {
         title: "",
         text: "",
-        key: "" //to identify each item uniquely
+        key: "", //to identify each item uniquely
       },
     };
     this.handleInput = this.handleInput.bind(this);
@@ -61,28 +60,17 @@ class App extends React.Component {
   showMore(key) {
     if (
       !this.showmore &&
-      document.getElementById(key) &&
       document.getElementById(key)
     ) {
-      document.getElementById(key).getElementsByTagName("p1")[0].style.display =
-        "inline-block";
-      document
-        .getElementById(key)
-        .getElementsByTagName("span")[0].style.display = "none";
-      document.getElementById(key).getElementsByTagName("Button")[0].innerText =
-        "Show Less";
+      document.getElementById(key).getElementsByTagName("p1")[0].style.display = "inline-block";
+      document.getElementById(key).getElementsByTagName("span")[0].style.display = "none";
+      document.getElementById(key).getElementsByTagName("Button")[0].innerText = "Show Less";
       this.showmore = true;
     } else {
-      if (document.getElementById(key) && document.getElementById(key)) {
-        document
-          .getElementById(key)
-          .getElementsByTagName("p1")[0].style.display = "none";
-        document
-          .getElementById(key)
-          .getElementsByTagName("span")[0].style.display = "inline-block";
-        document
-          .getElementById(key)
-          .getElementsByTagName("Button")[0].innerText = "Show More";
+      if (document.getElementById(key)) {
+        document.getElementById(key).getElementsByTagName("p1")[0].style.display = "none";
+        document.getElementById(key).getElementsByTagName("span")[0].style.display = "inline-block";
+        document.getElementById(key).getElementsByTagName("Button")[0].innerText = "Show More";
         this.showmore = false;
       }
     }
@@ -91,45 +79,57 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>
+        <div class="container-fluid">
+          <h2>
+            <b>Home</b>
+          </h2>
+          </div>
+          <div>
           <form onSubmit={this.addItem}>
             <FormControl fullWidth={true}>
-              <div>
+              <div class="container-fluid">
+              <div class="row">
+              <div class="col-lg-11">
                 <TextField
                   id="standard-basic"
                   required
                   style={{
                     borderRadius: "2rem",
                     padding: "7px",
-                    margin: "10px",
-                    backgroundColor:"rgb(140,245,255)",
-                    width:"1200px"
+                    backgroundColor: "rgb(140,245,255)",
                   }}
                   InputProps={{ disableUnderline: true }}
                   placeholder="Submit New"
+                  fullWidth="true"
                   //variant="filled"
                   value={this.state.currentItem.title || ""}
                   onChange={this.handleInput}
                 />
+                </div>
+                <div class="col-lg-1">
                 <Button
                   id="submit"
                   type="submit"
+                  size="large"
                   style={{
                     borderRadius: "1rem",
-                    backgroundColor:"rgb(140,245,255)",
-                    margin: "10px",
-                    height: "45px"
+                    backgroundColor: "rgb(140,155,255)",
                   }}
                 >
                   <b>Submit</b>
                 </Button>
+                
+                </div>
               </div>
+              <div class="row">
+                <div class="col-lg-12">
               <TextField
                 id="filled-textarea"
                 style={{
-                  backgroundColor:"rgb(140,245,255)",
-                  borderRadius:"0.2rem",
-                  padding:"7px"
+                  backgroundColor: "rgb(140,245,255)",
+                  borderRadius: "0.2rem",
+                  padding: "7px",
+                  marginTop: "12px",
                 }}
                 required
                 placeholder=" Enter Description"
@@ -141,24 +141,22 @@ class App extends React.Component {
                 onChange={this.handleInput}
                 InputProps={{ disableUnderline: true }}
               />
+              </div>
+              </div>
+
+              
+              </div>
             </FormControl>
           </form>
-        </header>
-
+          </div>
         <DiaryCard
           items={this.state.items}
           showMore={this.showMore}
         ></DiaryCard>
-        
-      </div>
+        </div>
+  
     );
   }
 }
 
-function mapsStateToProps(state){
-  return{
-    cards : state.cards
-  };
-}
-
-export default connect(mapsStateToProps)(App);
+export default App;
