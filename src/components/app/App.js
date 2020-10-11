@@ -17,7 +17,7 @@ class App extends React.Component {
          key:"1"
       },
       {title:"a",
-         text: "b",
+         text: "bssssssssssssss",
          key:"2"
       }
       ],
@@ -161,11 +161,12 @@ class App extends React.Component {
                   id="submit"
                   type="submit"
                   size="large"
+                  variant="contained"
                   style={{
                     borderRadius: "1rem",
-                    backgroundColor: "rgb(140,155,255)",
                     marginTop:"10px",
-                    display:"none"
+                    display:"none",
+                    backgroundColor: "rgb(90,180,255)",
                   }}
                 >
                   <b>Submit</b>

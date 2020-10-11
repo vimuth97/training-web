@@ -37,6 +37,8 @@ export default function DiaryCard(props) {
             <CardActions>
               <Button
                 id="read"
+                //variant="contained"
+                color="primary"
                 style={{ borderRadius: "1rem" }}
                 onClick={() => props.showMore(item.key)}
               >
