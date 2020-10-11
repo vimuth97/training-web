@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
+
 export default function DiaryCard(props) {
 
   const items = props.items;
@@ -51,12 +52,11 @@ export default function DiaryCard(props) {
     } else {
       return (
         <Grid item xs={12} sm={6} md={3} lg={3} xl={2} key={item.key}>
-          <div className="list" key={item.key}>
+       
             <Card
               style={{
                 borderRadius: "1rem",
-                backgroundColor: "lightblue",
-                
+                backgroundColor: "lightblue", 
               }}
             >
               <CardContent>
@@ -67,27 +67,25 @@ export default function DiaryCard(props) {
                 <p>{item.text}</p>
               </CardContent>
             </Card>
-          </div>
+        
         </Grid>
       );
     }
   });
 
   return (
-    <div className="container-fluid">
+  
     <Grid
       container 
       spacing={2}
       direction="row"
       justify="flex-start"
       alignItems="flex-start"
-      style={{
-        marginTop:"10px"
-      }}
+      style={{marginTop:"10px"}}
     >
       {listItems}
     </Grid>
-    </div>
+   
     
   );
 }

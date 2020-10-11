@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DiaryCard from "../diarycard/DiaryCard";
 import { Spring } from "react-spring/renderprops";
+import { Box} from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
 
 
 class App extends React.Component {
@@ -34,9 +35,12 @@ class App extends React.Component {
   }
 
   showForm(){
+    document.getElementById("submit").style.marginTop="10px";
     document.getElementById("submit").style.display="inline";
     document.getElementById("filled-textarea").style.display="block";
   }
+
+
   handleInput(e) {
     if (e.target.id === "standard-basic") {
       this.setState({
@@ -93,57 +97,56 @@ class App extends React.Component {
     }
   }
 
+  
+
   render() {
+
     return (
-      <div className="App">
-        <div className="container-fluid">
+      <div className="App"> 
           <h2>
             <b>Home</b>
           </h2>
-          </div>
-          <div>
           <Spring
           from={{ opacity:0}}
           to ={{ opacity:1}}
           config={{delay:500,duration:1200}}
         >
           {props =>(
+  
           <form onSubmit={this.addItem} style={props}>
             <FormControl fullWidth={true}>
-              <div className="container-fluid" >
-              <div className="row">
-              <div className="col-lg-12">
-                <TextField
+          
+              
+                <TextField 
                   id="standard-basic"
                   required
+                  InputProps={{ disableUnderline: true }}
+                  placeholder="Submit New"
+                  fullWidth={true}
+                  //variant="filled"
                   style={{
                     borderRadius: "2rem",
                     padding: "7px",
                     backgroundColor: "rgb(140,245,255)",
                   }}
-                  InputProps={{ disableUnderline: true }}
-                  placeholder="Submit New"
-                  fullWidth={true}
-                  //variant="filled"
+                
                   value={this.state.currentItem.title || ""}
                   onChange={this.handleInput}
                   onClick ={this.showForm}
                 />
-              
-                </div>
-              </div>
-              <div className="row" id="filled-textarea">
-                <div className="col-lg-12" >
-             
+          
+                  
                
-                    <TextField
+  
+             
+               <Box id="filled-textarea">
+               <TextField 
                 
                 style={{
                   backgroundColor: "rgb(140,245,255)",
                   borderRadius: "0.2rem",
                   padding: "7px",
                   marginTop: "12px",
-              
                 }}
                 required
                 placeholder=" Enter Description"
@@ -155,41 +158,41 @@ class App extends React.Component {
                 onChange={this.handleInput}
                 InputProps={{ disableUnderline: true }}
               />
-              </div>
-              </div>
-              <Button
+               
+             
+              <Fab
                   id="submit"
                   type="submit"
-                  size="large"
+                  size="medium"
                   variant="contained"
-                  style={{
-                    borderRadius: "1rem",
-                    marginTop:"10px",
-                    display:"none",
-                    backgroundColor: "rgb(90,180,255)",
-                  }}
+                  color="primary"
+                  style={{display:"none"}}
                 >
                   <b>Submit</b>
-                </Button>
+                </Fab>
+                 
+            </Box>
+             
+           
               
-                </div>
               
             </FormControl>
           </form>
+        
           )
         }
           </Spring>
-          </div>
+          
           <Spring
           from={{ opacity:0}}
           to ={{ opacity:1}}
           config={{delay:500,duration:1200}}
         >
-        {props=>(<div style={props}><DiaryCard
+        {props=>(<Box style={props}><DiaryCard 
           items={this.state.items}
           showMore={this.showMore}
         ></DiaryCard>
-        </div>
+        </Box>
         )
   }
         </Spring>
