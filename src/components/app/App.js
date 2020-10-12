@@ -1,12 +1,7 @@
 import React from "react";
 import "./App.css";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import DiaryCard from "../diarycard/DiaryCard";
-import { Spring } from "react-spring/renderprops";
-import { Box} from "@material-ui/core";
-import Fab from '@material-ui/core/Fab';
-
+import AddTodo from "../addtodo";
+import TodoList from '../TodoList'
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +28,8 @@ class App extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.showMore = this.showMore.bind(this);
   }
+
+ 
 
   showForm(){
     document.getElementById("submit").style.marginTop="10px";
@@ -102,100 +99,15 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="App"> 
+      <div className="App">
+
           <h2>
             <b>Home</b>
           </h2>
-          <Spring
-          from={{ opacity:0}}
-          to ={{ opacity:1}}
-          config={{delay:500,duration:1200}}
-        >
-          {props =>(
+          
   
-          <form onSubmit={this.addItem} style={props}>
-            <FormControl fullWidth={true}>
-          
-              
-                <TextField 
-                  id="standard-basic"
-                  required
-                  InputProps={{ disableUnderline: true }}
-                  placeholder="Submit New"
-                  fullWidth={true}
-                  //variant="filled"
-                  style={{
-                    borderRadius: "2rem",
-                    padding: "7px",
-                    backgroundColor: "rgb(140,245,255)",
-                  }}
-                
-                  value={this.state.currentItem.title || ""}
-                  onChange={this.handleInput}
-                  onClick ={this.showForm}
-                />
-          
-                  
-               
-  
-             
-               <Box id="filled-textarea">
-               <TextField 
-                
-                style={{
-                  backgroundColor: "rgb(140,245,255)",
-                  borderRadius: "0.2rem",
-                  padding: "7px",
-                  marginTop: "12px",
-                }}
-                required
-                placeholder=" Enter Description"
-                rows={4}
-                fullWidth={true}
-                multiline
-                //variant="filled"
-                value={this.state.currentItem.text || ""}
-                onChange={this.handleInput}
-                InputProps={{ disableUnderline: true }}
-              />
-               
-             
-              <Fab
-                  id="submit"
-                  type="submit"
-                  size="medium"
-                  variant="contained"
-                  color="primary"
-                  style={{display:"none"}}
-                >
-                  <b>Submit</b>
-                </Fab>
-                 
-            </Box>
-             
-           
-              
-              
-            </FormControl>
-          </form>
-        
-          )
-        }
-          </Spring>
-          
-          <Spring
-          from={{ opacity:0}}
-          to ={{ opacity:1}}
-          config={{delay:500,duration:1200}}
-        >
-        {props=>(<Box style={props}><DiaryCard 
-          items={this.state.items}
-          showMore={this.showMore}
-        ></DiaryCard>
-        </Box>
-        )
-  }
-        </Spring>
+        <AddTodo />
+        <TodoList />
         </div>
   
     );

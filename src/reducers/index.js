@@ -1,9 +1,12 @@
 import {combineReducers} from 'redux';
-import DiarycardReducer from './reducer-DiaryCard';
+import todos from './todos'
+
+
 
 const allReducers = combineReducers({
-    cards:DiarycardReducer
+    todos: todos
 });
+
 
 export default allReducers;
 
