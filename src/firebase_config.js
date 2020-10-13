@@ -1,19 +1,16 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
+import * as firebase from "firebase";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBrRiqucc5eQ15yumdGqR4DeC8PyR3biHQ",
-    authDomain: "dear-diary-vimuth.firebaseapp.com",
-    databaseURL: "https://dear-diary-vimuth.firebaseio.com",
-    projectId: "dear-diary-vimuth",
-    storageBucket: "dear-diary-vimuth.appspot.com",
-    messagingSenderId: "629134658647",
-    appId: "1:629134658647:web:73977a72c3197301586712",
-    measurementId: "G-KSDJ2XEHLW"
-  };
+  apiKey: "AIzaSyAnL_wf9Il0SLcRQXtp8RwP5fRMd5lgO7M",
+  authDomain: "dialy-diary-vimuth.firebaseapp.com",
+  databaseURL: "https://dialy-diary-vimuth.firebaseio.com",
+  projectId: "dialy-diary-vimuth",
+  storageBucket: "dialy-diary-vimuth.appspot.com",
+  messagingSenderId: "790622576261",
+  appId: "1:790622576261:web:a74f345dfaecf785d853ec",
+};
 
-  firebase.initializeApp(firebaseConfig);
-  firebase.firestore().settings({ timestampsInSnapshots:true});
 
-  export default firebase;
+firebase.initializeApp(firebaseConfig);
+export const databaseRef = firebase.database().ref();
+//export const todosRef = databaseRef.child("todos");;

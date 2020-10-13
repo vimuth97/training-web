@@ -50,3 +50,11 @@ h2 {
   display: none;
 }
 
+textarea {
+  border-radius: "0.5rem";
+  padding : "7px";
+                  background-color: "rgb(140,245,255)";
+                  outline: "0";
+                  border: "none";
+                  margin-bottom: "15px";
+}
