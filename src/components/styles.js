@@ -5,22 +5,18 @@ import Button from '@material-ui/core/Button';
 
 
 export const MyFab = styled(Fab)({
-    
         marginBottom: "20px", 
         outline: "0",
         border: "none",
-    
   });
 
-  export const MyCard = styled(Card)({
+export const MyCard = styled(Card)({
     borderRadius: "1rem",
-     backgroundColor: "lightblue",
-
+    backgroundColor: "lightblue",
 });
 
 export const ShowMoreButton = styled(Button)({
     borderRadius: "1rem", 
     outline:"none",
     backgroundColor: "#4DF0FF",
-
 });
