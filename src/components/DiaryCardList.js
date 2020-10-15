@@ -5,17 +5,19 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import { Spring } from "react-spring/renderprops";
-import { MyCard } from './styles';
-import { ShowMoreButton } from './styles';
+import { MyCard } from "./styles";
+import { ShowMoreButton } from "./styles";
+import { CircularProgress } from "@material-ui/core";
+
 
 class DiaryCardList extends React.Component {
-
-   showmore = false;
+  showmore = false;
 
   showMore(key) {
     if (!this.showmore && document.getElementById(key)) {
-      document.getElementById(key).getElementsByTagName("p1")[0].style.display =
-        "inline-block";
+      document
+        .getElementById(key)
+        .getElementsByTagName("label")[0].style.display = "inline-block";
       document
         .getElementById(key)
         .getElementsByTagName("span")[0].style.display = "none";
@@ -26,7 +28,7 @@ class DiaryCardList extends React.Component {
       if (document.getElementById(key)) {
         document
           .getElementById(key)
-          .getElementsByTagName("p1")[0].style.display = "none";
+          .getElementsByTagName("label")[0].style.display = "none";
         document
           .getElementById(key)
           .getElementsByTagName("span")[0].style.display = "inline-block";
@@ -38,18 +40,19 @@ class DiaryCardList extends React.Component {
     }
   }
 
-    render () {
-      this.props.fetchData()
-      const listItems = this.props.state.DiaryCards.data.map((item) => {
-        if (item.text.length > 10) {
+  render() {
+    this.props.fetchData();
+    //console.log(this.props.state.DiaryCards.loading)
+    const listItems = this.props.state.DiaryCards.data
+      .filter((item) => item)
+      .map((item) => {
+        if (item && item.text.length > 10) {
           const part1 = item.text.substring(0, 10);
           const part2 = item.text.substring(10, item.text.length);
-    
+
           return (
             <Grid item xs={12} sm={6} md={3} lg={3} xl={2} key={item.key}>
-              <MyCard
-                id={item.key}
-              >
+              <MyCard id={item.key}>
                 <CardContent>
                   <h4>{item.title}</h4>
                   <h5>
@@ -58,7 +61,7 @@ class DiaryCardList extends React.Component {
                   <p>
                     {part1}
                     <span style={{ display: "inline" }}>...</span>
-                    <p1 style={{ display: "none" }}>{part2}</p1>
+                    <label style={{ display: "none" }}>{part2}</label>
                   </p>
                 </CardContent>
                 <CardActions>
@@ -66,7 +69,7 @@ class DiaryCardList extends React.Component {
                     id="read"
                     //variant="contained"
                     color="primary"
-                    style={{outline:"none"}}
+                    style={{ outline: "none" }}
                     onClick={() => this.showMore(item.key)}
                   >
                     Show more
@@ -91,40 +94,50 @@ class DiaryCardList extends React.Component {
           );
         }
       });
-     
+
+    if (this.props.state.DiaryCards.loading) {
       return (
-        <Spring
-      from={{ opacity: 0 }}
-      to={{ opacity: 1 }}
-      config={{ delay: 1200, duration: 1400 }}
-    >
-      {(props) => (
-        <Grid
-          container
-          spacing={2}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-          style={props}
-        >
-          {listItems}
-        </Grid>
-      )}
-    </Spring>
-      )
+        <div>
+          <CircularProgress size="60px" />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            config={{ delay: 0, duration: 1400 }}
+          >
+            {(props) => (
+              <Grid
+                container
+                spacing={2}
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start"
+                style={props}
+              >
+                {listItems}
+              </Grid>
+            )}
+          </Spring>
+        </div>
+      );
     }
   }
+}
 
-  const mapStateToProps = (state) => ({
-    state: state,
-  })
+const mapStateToProps = (state) => ({
+  state: state,
+});
 
-  const mapDispatchToProps = (dispatch,props) =>{
-    return {
-      fetchData: () => dispatch(fetchData())
-    }
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(fetchData()),
+  };
+};
 
-  export default connect(mapStateToProps,mapDispatchToProps)(DiaryCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryCardList);
 
-//<ul><li>{JSON.stringify(this.props.state.DiaryCards)}</li></ul> 
+//<ul><li>{JSON.stringify(this.props.state.DiaryCards)}</li></ul>

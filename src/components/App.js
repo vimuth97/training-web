@@ -1,7 +1,7 @@
 import React from "react";
 import "./component.css";
 import AddForm from "./AddForm";
-import  DiaryCards  from "./DiaryCardList";
+import DiaryCards from "./DiaryCardList";
 
 
 class App extends React.Component {
@@ -12,9 +12,7 @@ class App extends React.Component {
           <b>Home</b>
         </h2>
         <AddForm />
-      
         <DiaryCards />
-      
       </div>
     );
   }

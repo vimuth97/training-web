@@ -1,45 +1,52 @@
-import { take,put,call, all,fork,takeEvery, select } from 'redux-saga/effects';
-import { requestData,requestDataError,requestDataSuccess,currentState } from '../actions';
-import { databaseRef } from '../firebase_config'
- 
+import { take, put, call, takeEvery, select } from "redux-saga/effects";
+import {
+  requestData,
+  requestDataError,
+  refresh,
+  requestDataSuccess,
+  currentState,
+} from "../actions";
+import { collection } from "../firebase_config";
 
-  
- 
- 
+
 //worker saga
 function* fetchDairyCards() {
-    try {
-      
-      yield put(requestData());
-      const data = yield call(() => {
-        
-        return databaseRef.once('value').then( function(snapshot){
-           return snapshot.val().Diarycards;
-           });
-        }
-      );
-      yield put(requestDataSuccess(data));
-    } catch (error) {
-      console.log(error);
-      yield put(requestDataError());
-    }
+  try {
+    yield put(requestData());
+    const data = yield call(() => {
+      return collection
+        .orderByKey()
+        .once("value")
+        .then(function (snapshot) {
+          return snapshot.val();
+        });
+    });
+    yield put(requestDataSuccess(data));
+  } catch (error) {
+    console.log(error);
+    yield put(requestDataError());
   }
+}
 
- 
-function* add(){
+function* add() {
   const state = yield select();
   yield put(currentState(state));
+  let data = {
+    key: state.todos.key,
+    title: state.todos.title,
+    text: state.todos.text,
+  };
+  collection.child(state.DiaryCards.data.length + 1).set(data);
+  yield put(refresh());
 }
 
 // watcher saga
 export default function* rootSaga() {
-    yield take('FETCH_DATA');
-    yield call(fetchDairyCards);
-    yield takeEvery('ADD_TODO',add);
-    //yield take('GET_CURRENT_STATE');
-    //yield call(getState);
-  }
-
+  yield take("FETCH_DATA");
+  yield call(fetchDairyCards);
+  yield takeEvery("ADD_TODO", add);
+  yield takeEvery("REFRESH", fetchDairyCards);
+}
 
 //export default function* rootSaga(){
 //     yield takeEvery('Hello', workerSaga);
@@ -47,5 +54,5 @@ export default function* rootSaga() {
 //     yield call(workerSaga);
 //     yield take('Logout');
 //     yield call(workerSaga);
-// 
+//
 //}

@@ -5,18 +5,18 @@ import { addTodo } from "../actions";
 import { Box } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import { Spring } from "react-spring/renderprops";
-import { MyFab } from './styles';
+import { MyFab, style_des, style_title } from "./styles";
+
 
 const AddForm = ({ dispatch }) => {
   let input1;
   let input2;
 
-
   return (
     <Spring
       from={{ opacity: 0 }}
       to={{ opacity: 1 }}
-      config={{ delay: 500, duration: 1200 }}
+      config={{ delay: 0, duration: 1400 }}
     >
       {(props) => (
         <div style={props}>
@@ -39,39 +39,25 @@ const AddForm = ({ dispatch }) => {
                 placeholder="Submit New"
                 ref={(node) => (input1 = node)}
                 required
-                style={{
-                  borderRadius: "2rem",
-                  padding: "7px",
-                  backgroundColor: "rgb(140,245,255)",
-                  outline: "0",
-                  border: "none",
-                  marginBottom: "13px",
-                }} 
+                style={style_title}
               />
-              <textarea 
+              <textarea
                 className="textarea1"
                 id="textarea1"
                 placeholder="Enter Description"
                 ref={(node) => (input2 = node)}
                 rows="5"
-                style={{
-                  borderRadius: "0.5rem",
-                  padding : "7px",
-                  backgroundColor: "rgb(140,245,255)",
-                  outline: "0",
-                  border: "none",
-                  marginBottom: "15px",
-                }}
+                style={style_des}
                 required
               />
               <Box>
-                <MyFab 
+                <MyFab
                   id="submit"
                   type="submit"
-                  size="medium"
+                  size="large"
                   variant="extended"
                   color="primary"
-                 style={{ outline: "0" }}
+                  style={{ outline: "0" }}
                 >
                   <b>Submit</b>
                 </MyFab>

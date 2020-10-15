@@ -26,7 +26,11 @@
 }
 
 body {
-  background: -webkit-linear-gradient(left,rgba(40,185,255,1),rgba(40,200,255,0.5));
+  background: -webkit-linear-gradient(
+    left,
+    rgba(40, 185, 255, 1),
+    rgba(40, 200, 255, 0.5)
+  );
 }
 
 .App-link {
@@ -46,15 +50,8 @@ h2 {
   color: white;
 }
 
-#filled-textarea{
+#filled-textarea {
   display: none;
 }
 
-textarea {
-  border-radius: "0.5rem";
-  padding : "7px";
-                  background-color: "rgb(140,245,255)";
-                  outline: "0";
-                  border: "none";
-                  margin-bottom: "15px";
-}
+ 
